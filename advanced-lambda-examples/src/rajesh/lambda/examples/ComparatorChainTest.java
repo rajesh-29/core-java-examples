@@ -56,6 +56,17 @@ public class ComparatorChainTest {
 		listOfPeople.stream()
 					.sorted(new DynamicPersonComparator(personComparator))
 					.forEach(System.out::println);
+		
+		listOfPeople.add(new Person(5, null, "Y", 66));
+		
+		Comparator<Person> combinedComparator = Comparator.comparing(Person::getFirstName, Comparator.nullsFirst(Comparator.naturalOrder()))
+					.thenComparing(Person::getLastName)
+					.thenComparing(Person::getAge);
+		
+		listOfPeople.stream()
+			// .sorted(new DynamicPersonComparator(personComparator)) // throws exception
+			.sorted(combinedComparator)
+			.forEach(System.out::println);
 	}
 	
 }
