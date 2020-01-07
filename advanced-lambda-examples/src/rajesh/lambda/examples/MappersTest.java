@@ -39,7 +39,15 @@ public class MappersTest {
 				.collect(Collectors.toList());
 		System.out.println(flatMappedList);
 		
-		Map<String, String> map = alphabetStream.collect(Collectors.toMap(word -> word, word -> word));
+		Stream<String> alphabetStream2 =
+	            Stream.of("alfa", "bravo", "charlie", "delta", "echo",
+	                    "foxtrot", "golf", "hotel", "india", "juliet",
+	                    "kilo", "lima", "mike", "november", "oscar",
+	                    "papa", "quebec", "romeo", "sierra", "tango",
+	                    "uniform", "victor", "whiskey", "x-ray", "yankee",
+	                    "zulu");
+		
+		Map<String, Integer> map = alphabetStream2.collect(Collectors.toMap(word -> word, word -> word.length()));
 		System.out.println(map);
 	}
 }
